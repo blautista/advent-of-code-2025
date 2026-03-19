@@ -1,6 +1,6 @@
-import { countOf, range, sumOf } from "../utils/array.js";
-import { lines } from "../utils/strings.js";
-import { advent } from "../utils/utils.js";
+import { countOf } from "../utils/array.ts";
+import { lines } from "../utils/strings.ts";
+import { advent } from "../utils/utils.ts";
 
 const XMAS = "XMAS";
 const MAS = XMAS.slice(1);

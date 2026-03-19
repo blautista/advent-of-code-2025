@@ -1,7 +1,7 @@
 import { EOL } from "node:os";
-import { advent } from "../utils/utils.js";
-import { lines } from "../utils/strings.js";
-import { countOf, sumOf, toIntArray } from "../utils/array.js";
+import { advent } from "../utils/utils.ts";
+import { lines } from "../utils/strings.ts";
+import { sumOf, toIntArray } from "../utils/array.ts";
 
 advent({
   day: 5,
@@ -41,7 +41,7 @@ advent({
       return update[Math.floor(update.length / 2)];
     }),
 
-  two(input) {
+  two() {
     return 0;
   },
 });

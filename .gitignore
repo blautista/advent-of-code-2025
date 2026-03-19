@@ -1,3 +1,4 @@
 /out
-/inputs
 /node_modules
+.zed
+/days/**/*.txt

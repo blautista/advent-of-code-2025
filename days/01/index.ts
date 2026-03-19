@@ -1,6 +1,6 @@
-import { sumOf } from "../utils/array.js";
-import { lines } from "../utils/strings.js";
-import { advent } from "../utils/utils.js";
+import { sumOf } from "../utils/array.ts";
+import { lines } from "../utils/strings.ts";
+import { advent } from "../utils/utils.ts";
 
 advent({
   day: 1,
@@ -28,6 +28,5 @@ advent({
     return sumOf(col1, (n, i) => similarityScore(n, col2[i]));
   },
 
-  two: ([col1, col2]) =>
-    sumOf(col1, (left, i) => sumOf(col2, (right) => (right === left ? left : 0))),
+  two: ([col1, col2]) => sumOf(col1, (left) => sumOf(col2, (right) => (right === left ? left : 0))),
 });

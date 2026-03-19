@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "day": "deno run --allow-read ./days/run.ts",
+    "create-day": "deno run --allow-write ./internal/createDay.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "fmt": {
+    "lineWidth": 100
+  }
+}

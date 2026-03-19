@@ -1,20 +1,20 @@
-import fs from "node:fs";
-import os from "node:os";
-import path, { dirname } from "node:path";
+import process from "node:process";
 import readline from "node:readline";
-import { fileURLToPath } from "node:url";
+import { dayToString } from "../days/utils/utils.ts";
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const getFolderPath = (day: string) => path.join(__dirname, "..", "..", "days", day);
+const getDayFolderPath = (day: string) =>
+  new URL(
+    `../days/${day}/`,
+    import.meta.url,
+  );
 
 const indexTemplate = (day: number) =>
-  `import { advent } from "../utils/utils.js";
+  `import { advent } from "../utils/utils.ts";
 
 advent({
   day: ${day},
@@ -34,28 +34,30 @@ advent({
 });
 `;
 
-rl.question("Enter day ", (day) => {
-  const num = Number(day);
-  if (num < 1 || num > 25) throw new Error("invalid day");
+const day = Deno.args[0];
 
-  if (num < 10) day = `0${num}`;
+if (!day) throw new Error("please pass a day as an argument");
 
-  const folderPath = getFolderPath(day);
+const num = Number(day);
 
-  fs.mkdirSync(folderPath, { recursive: true });
+if (num < 1 || num > 25) throw new Error("invalid day");
 
-  fs.writeFileSync(path.join(folderPath, "index.ts"), indexTemplate(num), { flag: "ax" });
+const folderPath = getDayFolderPath(dayToString(num));
 
-  fs.writeFileSync(path.join(__dirname, "..", "..", "inputs", `${day}.txt`), "INPUT HERE", {
-    flag: "ax",
-  });
-  fs.writeFileSync(
-    path.join(__dirname, "..", "..", "inputs", `${day}_test.txt`),
-    "TEST INPUT HERE",
-    {
-      flag: "ax",
-    },
-  );
+Deno.mkdirSync(folderPath);
 
-  rl.close();
-});
+Deno.writeTextFileSync(new URL("./index.ts", folderPath), indexTemplate(num));
+
+Deno.writeTextFileSync(
+  new URL("./input.txt", folderPath),
+  "INPUT HERE",
+);
+
+Deno.writeTextFileSync(
+  new URL("./test_input.txt", folderPath),
+  "TEST INPUT HERE",
+);
+
+rl.close();
+
+console.log(`Day created! Find it in days/${dayToString(num)}`);

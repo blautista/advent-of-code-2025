@@ -1,14 +1,17 @@
-import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
-import path from "node:path";
 
 const start = performance.now();
 
-export const readInput = (day: number, test?: boolean) =>
-  readFileSync(
-    path.join(process.cwd(), "inputs", `${String(day).padStart(2, "0")}${test ? "_test" : ""}.txt`),
-    "utf8",
+export const dayToString = (day: unknown) => String(day).padStart(2, "0");
+
+export const readInput = (day: number, test?: boolean) => {
+  const url = new URL(
+    `../${dayToString(day)}/${test ? "test_input" : "input"}.txt`,
+    import.meta.url,
   );
+
+  return Deno.readTextFileSync(url);
+};
 
 export const printSolutions = (
   firstTest: number | string | string[],
@@ -22,7 +25,9 @@ export const printSolutions = (
   console.log("Part two:", second);
   console.log("  (test):", secondTest);
   console.log(EOL);
-  console.log(`Total run time: ${((performance.now() - start) / 1000).toFixed(3)}s`);
+  console.log(
+    `Total run time: ${((performance.now() - start) / 1000).toFixed(3)}s`,
+  );
 };
 
 type AdventConfig<Input> = {
@@ -46,7 +51,12 @@ export const advent = <Input = string>(config: AdventConfig<Input>) => {
   const parsedTest = config.parse?.(rawTest) ?? (rawTest as Input);
 
   if (config.test) {
-    printSolutions(config.one(parsedTest), config.two?.(parsedTest), "skipped", "skipped");
+    printSolutions(
+      config.one(parsedTest),
+      config.two?.(parsedTest),
+      "skipped",
+      "skipped",
+    );
   } else {
     printSolutions(
       config.one(parsedTest),

@@ -1,6 +1,6 @@
-import { countOf, range, sumOf } from "../utils/array.js";
-import { lines } from "../utils/strings.js";
-import { advent } from "../utils/utils.js";
+import { countOf, range } from "../utils/array.ts";
+import { lines } from "../utils/strings.ts";
+import { advent } from "../utils/utils.ts";
 
 function isSafeReport(report: number[]): boolean {
   const desc = report[1] < report[0];
@@ -9,8 +9,7 @@ function isSafeReport(report: number[]): boolean {
     const right = report[i];
     const left = report[i - 1];
 
-    const safe =
-      right !== left &&
+    const safe = right !== left &&
       right < left === desc &&
       Math.abs(right - left) <= 3 &&
       Math.abs(right - left) >= 1;
@@ -29,7 +28,8 @@ advent({
   one: (reports) => countOf(reports, isSafeReport),
 
   two: (reports) =>
-    countOf(reports, (report) =>
-      range(report.length).some((i) => isSafeReport(report.toSpliced(i, 1))),
+    countOf(
+      reports,
+      (report) => range(report.length).some((i) => isSafeReport(report.toSpliced(i, 1))),
     ),
 });

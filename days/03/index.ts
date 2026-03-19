@@ -1,6 +1,6 @@
-import { mult, sum, sumOf, toIntArray } from "../utils/array.js";
-import { matches } from "../utils/strings.js";
-import { advent } from "../utils/utils.js";
+import { mult, sumOf, toIntArray } from "../utils/array.ts";
+import { matches } from "../utils/strings.ts";
+import { advent } from "../utils/utils.ts";
 
 const mul = (match: string) => mult(toIntArray(matches(match, /\d+/g)));
 
