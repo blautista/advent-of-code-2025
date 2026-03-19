@@ -1,19 +1,20 @@
 {
-  "name": "advent-of-code-2022",
+  "name": "advent-of-code-2024",
   "version": "1.0.0",
-  "description": "my shitty solutions to this years advent of code",
+  "description": "my shitty solutions to advent of code",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "watch": "tsc --watch",
+    "day": "tsc && cls && node ./out/days/index",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create-day": "node internal/createDay"
+    "create-day": "node ./out/internal/createDay"
   },
-  "author": "",
+  "author": "Bautista Romanazzi",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.11.13",
-    "prettier": "^3.0.2",
-    "typescript": "^5.3.2"
+    "@types/node": "^25.5.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
   }
 }

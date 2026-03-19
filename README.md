@@ -1,9 +1,9 @@
-# Solutions to advent of code 2023 in typescript
+# Solutions to advent of code 2024 in typescript
 
 Instructions:
 
-* Run ``tsc`` in the root folder to compile.
-* Run `node {{dayFolder}}`. For example, to execute day 5 do ``node 05``.
+* `npm i`.
+* `npm run day -- {{day}}`. For example, to execute day 5 do ``npm run day -- 5``.
 
 ## WARNING
 

@@ -11,7 +11,28 @@ const rl = readline.createInterface({
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const getFolderPath = (day: string) => path.join(__dirname, "..", day);
+const getFolderPath = (day: string) => path.join(__dirname, "..", "..", "days", day);
+
+const indexTemplate = (day: number) =>
+  `import { advent } from "../utils/utils.js";
+
+advent({
+  day: ${day},
+  test: true,
+
+  parse(raw) {
+    return raw
+  },
+
+  one(input) {
+    return 0;
+  },
+
+  two(input) {
+    return 0;
+  },
+});
+`;
 
 rl.question("Enter day ", (day) => {
   const num = Number(day);
@@ -23,20 +44,18 @@ rl.question("Enter day ", (day) => {
 
   fs.mkdirSync(folderPath, { recursive: true });
 
+  fs.writeFileSync(path.join(folderPath, "index.ts"), indexTemplate(num), { flag: "ax" });
+
+  fs.writeFileSync(path.join(__dirname, "..", "..", "inputs", `${day}.txt`), "INPUT HERE", {
+    flag: "ax",
+  });
   fs.writeFileSync(
-    path.join(folderPath, "index.ts"),
-    `import { printSolutions, readInput } from "../utils.js";
-
-const input = readInput(import.meta.url);
-
-const firstSolution = 0;
-const secondSolution = 0;
-
-printSolutions(firstSolution, secondSolution);`,
-    { flag: "ax" }
+    path.join(__dirname, "..", "..", "inputs", `${day}_test.txt`),
+    "TEST INPUT HERE",
+    {
+      flag: "ax",
+    },
   );
-
-  fs.writeFileSync(path.join(folderPath, `input.txt`), "INPUT HERE", { flag: "ax" });
 
   rl.close();
 });
