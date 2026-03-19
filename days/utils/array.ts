@@ -4,6 +4,14 @@ export function sum(arr: number[]): number {
   return arr.reduce((prev, curr) => prev + curr, 0);
 }
 
+export function toIntArray(arr: string[]): number[] {
+  return arr.map((e) => parseInt(e));
+}
+
+export function mult(arr: number[]): number {
+  return arr.reduce((prev, curr) => prev * curr, 1);
+}
+
 export function sumOf<T>(arr: T[], selector: (n: T, i: number) => number): number {
   return sum(arr.map(selector));
 }

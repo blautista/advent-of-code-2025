@@ -27,13 +27,13 @@ export const printSolutions = (
 
 type AdventConfig<Input> = {
   day: number;
-  parse(raw: string): Input;
+  parse?: (raw: string) => Input;
   test?: boolean;
   one: (input: Input) => number | string;
   two?: (input: Input) => number | string;
 };
 
-export const advent = <Input>(config: AdventConfig<Input>) => {
+export const advent = <Input = string>(config: AdventConfig<Input>) => {
   const raw = readInput(config.day, false);
   const rawTest = readInput(config.day, true);
 
@@ -42,8 +42,8 @@ export const advent = <Input>(config: AdventConfig<Input>) => {
     return;
   }
 
-  const parsed = config.parse(raw);
-  const parsedTest = config.parse(rawTest);
+  const parsed = config.parse?.(raw) ?? (raw as Input);
+  const parsedTest = config.parse?.(rawTest) ?? (rawTest as Input);
 
   if (config.test) {
     printSolutions(config.one(parsedTest), config.two?.(parsedTest), "skipped", "skipped");
