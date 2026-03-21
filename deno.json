@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "day": "deno run --allow-read ./days/run.ts",
+    "day": "deno run -P=day --env-file ./days/run.ts",
     "create-day": "deno run --allow-write ./internal/createDay.ts"
   },
   "imports": {
@@ -8,5 +8,15 @@
   },
   "fmt": {
     "lineWidth": 100
+  },
+  "permissions": {
+    "day": {
+      "read": ["./days/"],
+      "write": ["./days/"],
+      "net": ["adventofcode.com"],
+      "env": {
+        "allow": ["SESSION"]
+      }
+    }
   }
 }
