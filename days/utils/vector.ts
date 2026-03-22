@@ -46,6 +46,28 @@ export function setToArray(set: VectorSet) {
   return Array.from(set, (item) => fromString(item));
 }
 
+export function opposite(vec: Vec2): Vec2 {
+  return create(-vec.j, -vec.i);
+}
+
+export function subtract(vec: Vec2, and: Vec2): Vec2 {
+  return sum(vec, opposite(and));
+}
+
+export function withinBounds(vec: Vec2, maxI: number, maxJ: number, minI = 0, minJ = 0): boolean {
+  return vec.i < maxI && vec.j < maxJ && vec.i >= minI && vec.j >= minJ;
+}
+
+export function withinBoundsInclusive(
+  vec: Vec2,
+  maxI: number,
+  maxJ: number,
+  minI = 0,
+  minJ = 0,
+): boolean {
+  return vec.i <= maxI && vec.j <= maxJ && vec.i >= minI && vec.j >= minJ;
+}
+
 export class VectorSet extends Set {
   override has(vec: Vec2) {
     return super.has(stringify(vec));

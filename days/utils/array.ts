@@ -74,3 +74,11 @@ export function createArray<T>(size: number, mapper: (index: number) => T): T[] 
     .fill(0)
     .map((_, i) => mapper(i));
 }
+
+export function compareAll<T>(arr: T[], fn: (a: T, b: T, i: number, j: number) => void) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      fn(arr[i], arr[j], i, j);
+    }
+  }
+}
