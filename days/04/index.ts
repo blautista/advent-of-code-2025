@@ -1,4 +1,5 @@
 import { countOf } from "../utils/array.ts";
+import { ADJACENT_INDEXES, DIAGONAL_INDEXES } from "../utils/graph.ts";
 import { lines } from "../utils/strings.ts";
 import { advent } from "../utils/utils.ts";
 
@@ -25,21 +26,12 @@ function formsXmas(
   return true;
 }
 
-const diagonalIndexes = [
-  [1, 1],
-  [-1, 1],
-  [-1, -1],
-  [1, -1],
-];
-
-const adjacentIndexes = [[1, 0], [0, 1], [-1, 0], [0, -1], ...diagonalIndexes];
-
 function countXmas(graph: string[], i: number, j: number) {
-  return countOf(adjacentIndexes, ([iInc, jInc]) => formsXmas(graph, i, j, iInc, jInc));
+  return countOf(ADJACENT_INDEXES, ([iInc, jInc]) => formsXmas(graph, i, j, iInc, jInc));
 }
 
 function formsX(graph: string[], i: number, j: number): boolean {
-  const diagonalPositions = diagonalIndexes.map(([iInc, jInc]) => graph?.[i + iInc]?.[j + jInc]);
+  const diagonalPositions = DIAGONAL_INDEXES.map(([iInc, jInc]) => graph?.[i + iInc]?.[j + jInc]);
 
   // this is dumb
   return (
