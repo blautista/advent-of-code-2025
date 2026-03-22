@@ -8,6 +8,10 @@ export function toIntArray(arr: string[]): number[] {
   return arr.map((e) => parseInt(e));
 }
 
+export function toBigIntArray(arr: string[]): bigint[] {
+  return arr.map((e) => BigInt(e));
+}
+
 export function mult(arr: number[]): number {
   return arr.reduce((prev, curr) => prev * curr, 1);
 }
