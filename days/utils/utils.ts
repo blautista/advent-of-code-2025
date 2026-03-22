@@ -78,7 +78,7 @@ export async function advent<Input = string>(config: AdventConfig<Input>) {
   let solutions = {};
   const parsed = config.parse?.(raw) ?? (raw as Input);
 
-  if (rawTest && !rawTest.includes("INPUT HERE")) {
+  if (rawTest && !rawTest.includes("INPUT HERE") && config.test !== false) {
     const parsedTest = config.parse?.(rawTest) ?? (rawTest as Input);
     solutions = { firstTest: config.one(parsedTest), secondTest: config.two?.(parsedTest) };
   }
