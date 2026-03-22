@@ -1,4 +1,4 @@
-export const range = (n: number) => Array.from({ length: n }, (_, i) => i);
+export const range = (n: number, from = 0) => Array.from({ length: n }, (_, i) => i + from);
 
 export function sum(arr: number[]): number {
   return arr.reduce((prev, curr) => prev + curr, 0);
